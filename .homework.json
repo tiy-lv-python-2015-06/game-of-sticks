@@ -1,0 +1,12 @@
+{
+  "name": "game-of-sticks",
+  "version": "0.0.1",
+  "title": "Create the Game of Sticks.",
+  "description": "Create a version of the Game of Sticks where human and AI players
+  can play against each other.",
+  "keywords": [
+    "basics",
+    "game",
+    "weekend-lab"
+  ]
+}
