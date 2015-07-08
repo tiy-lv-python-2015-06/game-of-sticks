@@ -1,5 +1,8 @@
 import random
 
+#look at how the AI is running
+#pit how AI
+
 class StickStack:
     def __init__(self, how_many_sticks):
         """Creates instance of Stack of Sticks"""
@@ -18,10 +21,24 @@ class StickStack:
         self.stick_count = self.stick_count + how_many_sticks
         return self.stick_count
 
+class Picks:
+
+    def __init__(self):
+        pass
+
+    def set_pick(self, how_many_sticks):
+        self.stick_count = how_many_sticks
+
+
 
 class Player:
-    # what properties of players will i need??
-    pass
+    """Player keeps its score, its name, his sets of turns"""
+    def __init__(self, name="Hal"):
+        self.name = name
+        self.score = score
+        self.turns_sets = []
+
+
 
 
 # class AIPlayer
