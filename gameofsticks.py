@@ -33,10 +33,20 @@ class Player:
         self.picked_sets = []
 
 
-    def choose_number_of_sticks(self):
+    def choose_number_of_sticks(self, stick_count):
         print("Your turn, {}.\n".format(self.name))
-        raw_choice = input("How many sticks do you want? > \n")
-        number_chosen = int(raw_choice)
+        if stick_count >= 3:
+            max_number = 3
+        else:
+            max_number = stick_count
+        choice = 0
+        while choice == 0 or choice > max_number:
+            print("Pick 1-{} sticks. \n".format(max_number))
+            choice = int(input("How many sticks do you want? > \n"))
+            if choice < 1 or choice > max_number:
+                print("Your choice is not acceptable. Please choose again.")
+            else:
+                number_chosen = choice
         return number_chosen
 
 
@@ -93,14 +103,13 @@ class Game:
             # tell player how many sticks in overall stick_stack
             print("There are {} sticks in the Stick Stack \n".format(self.stick_stack.stick_count))
             # ask player to choose number of sticks
-            number_chosen = self.player.choose_number_of_sticks()
+            number_chosen = self.player.choose_number_of_sticks(self.stick_stack.stick_count)
             # have that choice go to set_choice which and updates stick_stack.count and turn count
             self.set_choice(number_chosen)
             #change players
             self.change_current_player()
         if self.stick_stack.stick_count < 1:
             self.you_lose()
-            print("You lose, {}".format(self.current_player))
 
 
 
