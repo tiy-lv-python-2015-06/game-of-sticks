@@ -90,6 +90,7 @@ class AI(Player):
 
 
 
+
 class DumbAI(Player):
     def __init__(self, training):
         self.name = 'Dumb'
@@ -144,6 +145,7 @@ class Hat:
             for x in range(1,4):
                 if x not in self.list_of_balls:
                     self.list_of_balls.append(x)
+        self.guessed_ball = 0
         # print(self.list_of_balls)
 
     def __str__(self):
@@ -175,18 +177,18 @@ if __name__ == '__main__':
         elif game_mode == '3':
             player1 = DumbAI(training=True)
             player2 = AI(training=True)
+            print('Please wait while I get smarter than you')
             while True:
-                for x in range(1,100000):
+                for x in range(1,10000):
                     game = Game(player1, player2)
                     game.play()
                 print('{} has won {} wins'.format(player1.name, player1.win))
                 print('{} has won {} wins'.format(player2.name, player2.win))
-                again = input('Train again?')
+                again = input('Ok, should I Train again?')
                 if again == 'n':
                     break
                 else:
                     continue
-            # train_ai(player1,player2)
             player2.training=False
             player1 = Player(input('Please Enter a name for the player\n'))
             break
