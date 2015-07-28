@@ -1,13 +1,14 @@
+import random
 
 
-
-class Game:
+class Game():
 #This does all the heavy lifting
-    def __init__(self, player1, player2):
+    def __init__(self, sticks, player1, player2):
         self.player1 = player1
         self.player2 = player2
         self.current_player = player1
-        self.stick_count = Sticks()
+        self.sticks = sticks
+
 
     def active_player(self):
         if self.current_player == self.player1:
@@ -17,49 +18,43 @@ class Game:
             self.current_player = self.player1
             self.player = self.current_player
 
-    def start(self):
-        while self.stick_count > 0:
-            print("{} sticks in the stick pile!".format(self.stick_count))
 
-        #I need to activate the players turn
-        #and set the win / lose conditions
-        #then run it all.
-        #that sounds so easy to type.
+    def start(self):
+        while self.sticks > 1:
+            print("{} sticks in the stick pile!".format(self.sticks))
+            picker = self.current_player.player_turn(self.sticks)
+            self.sticks -= picker
+            self.active_player()
+
+        else:
+            print("GAME OVER MAN!!")
 
 
 class Player:
-#This will handle player 1, 2 and AI. and Turns
-    def __init__(self, name="Hank"):
+#This will handle player 1, 2 and AI.
+    def __init__(self, name):
         self.name = name
-        self.stick_count = Sticks()
-        self.stick_remove = 0
 
-    def player_turn(self):
-        if self.stick_count >= 3:
-            stick_remove = input("{} how many sticks would"
-                                 " you like to remove (1-3)? ".format(self.name))
-            self.stick_count = self.stick_count -  self.stick_remove
-            return self.stick_count
+    def player_turn(self, sticks):
+        choice = int(input("How many sticks would you like to remove(1-3)? "))
+        return choice
 
-        elif self.stick_count <= 2:
-            stick_remove = input("{} how many sticks would"
-                            "you like to remove (1-2)? ".format(self.name))
-            self.stick_count = self.stick_count - self.stick_remove
-            return self.stick_count
-
-
-class Sticks:
-#This is just going to hold the sticks
-    def __init__(self):
-        self.stick_count = 0
-
-    def stick_pile(self):
-        stick_count = input(int("Welcome to Sticks! Please choose (10-100)"))
-        if stick_count < 10 or stick_count > 100:
-            print("That was not a valid number!")
-        else:
-            return stick_count
-
+    # class Hat:
+    #
+    #     def __init__(self):
+    #         self.chosen_ball = []
+    #         self.ball_list = [1, 2, 3]
+    #
+    #     def hat_bucket(self):
+    #         hats = {hat hats[x] for hats in hat}
+    #
+    #         for self.hat in hats:
+    #             self.chosen_ball.self.random.choice[1, 2, 3]
 
 if __name__ == '__main__':
 
+    player1 = Player("Jim")
+    player2 = Player("Bob")
+
+    game = Game(10, player1, player2)
+    game.start()
