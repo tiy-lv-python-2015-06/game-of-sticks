@@ -20,6 +20,12 @@ class Game():
 
 
     def start(self):
+        starting_sticks = int(input("Welcome to Sticks! Please enter a number"
+                            " between (10-100): "))
+        if starting_sticks < 10 or starting_sticks > 100:
+            print("That was not a valid choice, Please try again (10_100): ")
+            self.start()
+
         while self.sticks > 1:
             print("{} sticks in the stick pile!".format(self.sticks))
             picker = self.current_player.player_turn(self.sticks)
@@ -27,7 +33,7 @@ class Game():
             self.active_player()
 
         else:
-            print("GAME OVER MAN!!")
+            print("{} You Lose!".format(self.current_player.name))
 
 
 class Player:
@@ -36,25 +42,43 @@ class Player:
         self.name = name
 
     def player_turn(self, sticks):
-        choice = int(input("How many sticks would you like to remove(1-3)? "))
+        choice = int(input("{} How many sticks would you"
+                           " like to remove(1-3)? ".format(self.name)))
+        if choice < 1 or choice > 3:
+            self.player_turn()
+        else:
+            return choice
+
+
+class DumbComputer(Player):
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def player_turn(self, sticks):
+        choice = random.randint(1, 3)
+        print("{} removed {} sticks".format(self.name, choice))
         return choice
 
-    # class Hat:
-    #
-    #     def __init__(self):
-    #         self.chosen_ball = []
-    #         self.ball_list = [1, 2, 3]
-    #
-    #     def hat_bucket(self):
-    #         hats = {hat hats[x] for hats in hat}
-    #
-    #         for self.hat in hats:
-    #             self.chosen_ball.self.random.choice[1, 2, 3]
+class Hat:
+    ball_list = [1, 2, 3]
+    ball_choice = 0
+    number = 0
+    def __init__(self, number):
+        self.number = number
+
+    def choose_ball(self):
+        self.ball_choice = random.choice(self.ball_list)
+        return self.ball_choice
+
+
+
+
 
 if __name__ == '__main__':
 
     player1 = Player("Jim")
-    player2 = Player("Bob")
+    player2 = DumbComputer("AI")
 
     game = Game(10, player1, player2)
     game.start()
